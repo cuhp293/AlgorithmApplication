@@ -1,23 +1,32 @@
 #include <bits/stdc++.h>
-
 using namespace std;
+
+int iStore[4];
+int T;
+
+void input() {
+    for (int i = 0; i < 4; i++) {
+        cin >> iStore[i];
+    }
+}
+
+void solve() {
+    sort(iStore, iStore + 4);
+    if (iStore[0] < 0 && iStore[1] < 0)
+        cout << iStore[0] + iStore[1] << endl;
+    else if (iStore[0] < 0)
+        cout << iStore[0] << endl;
+    else cout << 0;
+}
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
 
-    int T;
-    int store[4];
     cin >> T;
     for (int i = 0; i < T; i++) {
-        cin >> store[1] >> store[2];
-        cin >> store[3] >> store[4];
-
-        sort(store, store + 4);
-        int sum = 0;
-        if (store[1] < 0) sum += store[1];
-        if (store[2] < 0) sum += store[2];
-        cout << sum << endl;
+        input();
+        solve();
     }
 
     return 0;
