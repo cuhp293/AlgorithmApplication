@@ -1,28 +1,46 @@
 #include <bits/stdc++.h>
 using namespace std;
-string sKey[9] = {"abc" , "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz", " "};
+
+char cKey[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
+                 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
+                 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '};
+int iKey[] = {1, 2, 3, 1, 2, 3, 1, 2, 3,
+                1, 2, 3, 1, 2, 3, 1, 2, 3, 4,
+                1, 2, 3, 1, 2, 3, 4, 1};
+int T;
+string sLine;
+
+void input() {
+    fflush(stdin);
+    cin >> sLine;
+}
+
+int add(char a, char *cKey) {
+    for (int i = 0; i < 25; i++) {
+        if (cKey[i] == a) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int solve() {
+    int res = 0;
+    int n = sLine.length();
+    for (int i = 0; i < n; i++) {
+        res += iKey[add(sLine[i], cKey)];
+    }
+    return res;
+}
 
 int main() {
     ios::sync_with_stdio;
     cin.tie(0); cout.tie(0);
 
-    int T; cin >> T;
-    for (int t = 0; t < T; t++) {
-        string sLine;
-        getline(cin, sLine);
-        int res = 0;
-        for (int i = 0; i < sLine.size(); i++) {
-            int cur = 0;
-            for (int j = 0; j < 9; j++) {
-                for (int k = 0; k < sKey[j].size(); k++) {
-                    if (sLine[i] == sKey[j][k]) {
-                        cur = k + 1;
-                    }
-                }
-            }
-            res += cur;
-        }
-        cout << "Case #" << t + 1 << ": " << res;
+    cin >> T;
+    for (int i = 0; i < T; i++) {
+        input();
+        cout << "Case #" << i + 1 << ": " << solve() << endl;
     }
 
     return 0;
