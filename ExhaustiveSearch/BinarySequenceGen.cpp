@@ -1,20 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define MAX_N 100005
-
 int n;
-int f[MAX_N];
+string curString;
 
-void BINARY_SEQUENCE_GEN(int n, string s = "", int i = 0) {
-    if (i == n) {
-        cout << s << endl;
+void BINARY_SEQUENCE_GEN(int pos) {
+    if (pos > n) {
+        cout << curString << endl;
         return;
     }
-
-    BINARY_SEQUENCE_GEN(n, s+"0", i+1);
-    BINARY_SEQUENCE_GEN(n, s+"1", i+1);
-    return;
+    
+    for (char i = '0'; i <= '1'; i++) {
+        curString.push_back(i);
+        BINARY_SEQUENCE_GEN(pos + 1);
+        curString.pop_back();
+    }
 }
 
 int main() {
@@ -22,7 +22,8 @@ int main() {
     cin.tie(NULL); cout.tie(NULL);
 
     cin >> n;
-    BINARY_SEQUENCE_GEN(n);
+    curString = "";
+    BINARY_SEQUENCE_GEN(1);
 
     return 0;
 }
