@@ -3,31 +3,29 @@ using namespace std;
 
 const int N = 1e5 + 4;
 
-int n;
-vector<int> vt;
+int n, A[N], Mem[N];
+bool bMarked[N] = {false};
+
 
 void input() {
     cin >> n;
-    for (int i = 0; i < n; i++) {
-        int tmp;
-        cin >> tmp;
-        vt.push_back(tmp);
+    for (int i = 1; i <= n; i++) {
+        cin >> A[i];
     }
 }
 
-void solve(vector<int> vt, int n) {
-    int sum = 0;
-    int maxSum = 0;
+int MaxSeq(int i) {
+    if (i == 1) return A[1];
+    if (bMarked[i]) return Mem[i];
+    int res = max(MaxSeq(i - 1) + A[i], A[i]);
+    bMarked[i] = true;
+    return Mem[i] = res;
+}
 
-    for (int i = 0; i < n; i++) {
-        sum += vt[i];
-        if (sum < 0) {
-            sum = 0;
-        } else if (sum > maxSum) {
-            maxSum = sum;
-        }
-    }
-    cout << maxSum;
+void Trace(int i) {
+    if (i != 1 && Mem[i] == A[i] + Mem[i-1])
+        Trace(i-1);
+    // cout << A[i] << " ";
 }
 
 int main() {
@@ -35,7 +33,14 @@ int main() {
     cin.tie(0); cout.tie(0);
 
     input();
-    solve(vt, n);
+    int result = MaxSeq(1);
+    int pos;
+    for (int i = 1; i <= n; i++) {
+        result = max(result, MaxSeq(i));
+        pos = i;
+    }
+    cout << result << endl;
+    Trace(pos);
 
     return 0;
 }

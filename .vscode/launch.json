@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/AlgorithmApplication/AdHoc",
-      "program": "c:/AlgorithmApplication/AdHoc/build/Debug/outDebug",
+      "cwd": "d:/code/AlgorithmApplication",
+      "program": "d:/code/AlgorithmApplication/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
