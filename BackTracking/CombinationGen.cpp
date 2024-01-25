@@ -4,41 +4,32 @@
 using namespace std;
 
 int n, k;
-vector<int> curSubset; // Vector lưu trữ tổ hợp hiện tại
+int A[1000];
 
-
-// In ra tổ hợp hiện tại
-void printSubset() {
-    for (int i : curSubset)
-        cout << i << " ";
+void printSol(){
+    for(int i = 1; i <= k; i++) {
+        cout << A[i] << " ";
+    }
     cout << endl;
 }
+void gen(int pos) {
+	for(int i = A[pos-1]+1; i <= n-k+pos; i++) {
+        A[pos] = i;
+        if(pos == k) {
+            printSol();
+        } else {
+            gen(pos+1);
+        }
 
-// Thêm từng số vào curSubset đến khi đủ k
-void genSubset(int pos) {
-
-    /* curSubset.empty() trả về true nếu rỗng, false nếu không rỗng
-    ? khi curSubset.empty() return true
-    : khi curSubset.back() return false (trả về phần tử cuối cùng của curSubset)
-    */
-    int lastNum = (curSubset.empty() ? 0 : curSubset.back());
-    for (int i = lastNum+1; i <= n; i++) {
-        curSubset.push_back(i);
-        if (curSubset.size() == k)
-            printSubset();
-        else
-            genSubset(pos + 1);
-        curSubset.pop_back();
-    }
+	}
 }
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL); cout.tie(NULL);
+	ios_base::sync_with_stdio(0);
+	cin.tie(0); cout.tie(0);
 
-    cin >> n >> k;
-    curSubset.clear();
-    genSubset(1);
+	cin >> k >> n;
+	gen(1);
 
-    return 0;
+	return 0;
 }
