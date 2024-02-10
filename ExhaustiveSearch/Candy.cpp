@@ -6,7 +6,7 @@ int m, n;
 int a[N];
 int m0 = 0, m1;
 
-void solve() {
+void printSolve() {
     for (int i = 1; i <= n; i++) {
         cout << a[i] << " ";
     }
@@ -16,7 +16,7 @@ void solve() {
 void Try(int k) {
     if (k == n) {
         a[k] = m - m0;
-        solve();
+        printSolve();
         return;
     }
     m1 = m - m0 - (n - k);
